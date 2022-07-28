@@ -12,6 +12,8 @@ import TokenSimulationModule from "bpmn-js-token-simulation/lib/modeler";
 import ResetSimulation from "bpmn-js-token-simulation/lib/features/reset-simulation";
 import TokenSimulationSupportModule from "bpmn-js-token-simulation/lib/simulation-support";
 
+import TemplateExtension from './template-guide'
+
 const diagramSelect = document.getElementById("choose-diagram");
 const toggleSimulation = document.getElementById("toggle-simulation");
 const toggleGuide = document.getElementById("toggle-guide");
@@ -38,7 +40,8 @@ var modeler = new Modeler({
   additionalModules: [
     TokenSimulationModule,
     ResetSimulation,
-    TokenSimulationSupportModule
+    TokenSimulationSupportModule,
+    TemplateExtension
   ]
   
 });
