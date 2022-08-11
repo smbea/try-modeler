@@ -1,6 +1,7 @@
 :root {
   --token-simulation-green-base-44: #FC5D0D;
-  --tooltip-color: #FC5D0D;
+  --tooltip-color: #f98c56;
+  --cm-color-ui-dark4: #1f2023;
 }
 
 body {
@@ -168,51 +169,50 @@ a.bjs-powered-by {
 }
 
 /* --- */
+.djs-overlay.foreground {
+  z-index: 1;
+}
 
 .template-trigger {
   width: 24px;
   height: 24px;
   position: absolute;
   border-radius: 50%;
-
-  margin-left: -36px;
   box-shadow: 0 0 0 1px var(--tooltip-color), inset 0 0 0 1px var(--tooltip-color),
-    0 0 3px 1px var(--tooltip-color), inset 0 0 4px 0px var(--tooltip-color);
+    0 0 4px 2px var(--tooltip-color), inset 0 0 4px 0px var(--tooltip-color);
 }
 .template-trigger::before {
   content: '';
   display: block;
   border-radius: 50%;
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   background: var(--tooltip-color);
+  opacity: 0.25;
 }
+
 .template-trigger::after {
   content: '';
   display: block;
   border-radius: 50%;
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 70px;
+  height: 70px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 1px var(--tooltip-color), inset 0 0 0 1px var(--tooltip-color);
 }
 
-.template-tooltip { 
+.template-tooltip {
   display: none;
-  z-index: 150; 
   position: relative;
-  left: -358px;
-  top: 40px;
   width: 350px;
   padding: 15px 20px 20px 15px;
-  background-color: #1f2023;
+  background-color: var(--cm-color-ui-dark4);
   border-radius: 3px;
 
   color: #fff;
@@ -220,30 +220,31 @@ a.bjs-powered-by {
 }
 .template-tooltip::before {
   content: '';
+    position: absolute;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
 
-  position: absolute;
-
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 8px solid #1f2023;
+.template-tooltip.top-arrow::before {
   top: -8px;
-  right: 45px;
+  border-bottom: 8px solid var(--cm-color-ui-dark4);
 }
-.template-tooltip::after {
-  content: '';
 
-  position: absolute;
-  top: -50px;
-  right: 12px;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  border-bottom: 50px solid transparent;
+.template-tooltip.bottom-arrow::before {
+    bottom: -8px;
+    border-top: 8px solid var(--cm-color-ui-dark4);
 }
+
+.template-tooltip.left-arrow::before {
+  left: 25px;
+}
+
+.template-tooltip.right-arrow::before {
+  right: 25px;
+}
+
+.template-tooltip:hover,
 .template-trigger:hover + .template-tooltip {
-  display: block;
-}
-
-.template-tooltip:hover {
   display: block;
 }
 .template-tooltip a {

@@ -8,9 +8,7 @@ export default [{
     name: 'Absence Request',
     description: `This process handles absence requests. As an employee, you can file an absence request which will then be reviewed by your manager. The manager might accept or reject your request, or request a further explanation for it before reviewing it again. If the review has not happened within two days, the manager will be reminded.`,
     diagram: absenseRequestDiagram,
-    config: {
-      diagram: {
-        tooltips: [
+tooltips: [
           {
             id: 'Activity_1ihlcws',
             text: 'This <a href="https://docs.camunda.io/docs/reference/bpmn-processes/user-tasks/user-tasks" target="_blank">User Task</a> assigns work to a human user. The task will show up in <a href="https://docs.camunda.io/docs/product-manuals/tasklist/introduction" target="_blank">Tasklist</a> or any other frontend you integrate with Camunda. The user can claim the task, fill out the <a href="https://docs.camunda.io/docs/product-manuals/tasklist/userguide/camunda-forms" target="_blank">Task Form</a> and submit it to complete the task. When the task is completed, the process will continue to the next step.'
@@ -28,8 +26,7 @@ export default [{
             text: 'We have defined a <a href="https://docs.camunda.io/docs/reference/bpmn-processes/exclusive-gateways/exclusive-gateways#conditions" target="_blank">condition expression</a> in the properties of this Sequence Flow. If the value of the variable “result” is “rejected”, then the process will continue on this flow. The variable has been populated by the task form that had been submitted in the previous User task “Approve Absence”.'
           }
         ]
-      }
-    }
+
 
   },
   {
@@ -37,8 +34,6 @@ export default [{
     name: 'Ticket Booking',
     description: `This process handles ticket sales for events. In the first step, we reserve the respective seats via gRPC. If this fails due to an error, the booking is cancelled. Once the seats have been reserved, we request via AMQP that the payment will be retrieved and then wait for an event that confirms the arrival of the payment. If that event does not arrive within 30 seconds, the booking is cancelled. Once we’ve received the payment, we trigger the ticket generation in the respective system via REST.`,
     diagram: ticketBookingDiagram,
-    config: {
-      diagram: {
         tooltips: [
           {
             id: 'Activity_1g89uec',
@@ -61,17 +56,13 @@ export default [{
             text: 'This <a href="https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events" target="_blank">Timer Event</a> is attached to a Receive Task. It triggers based on the duration interval that you specify in the <a href="https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events#timers" target="_blank">properties</a> - in this case, after 30 seconds. It is interrupting which means that once 30 seconds have passed since the workflow engine has waited for the message in ‘payment received’, it will cancel the Receive Task and not process that message anymore. Instead, it will end the process in the End Event ‘Booking cancelled”.'
           }
         ]
-      }
-    }
-  },
+      },
   {
     id: 'enforcing-sla',
     name: 'Enforcing SLA',
     description:
       'A process that showcases how timer events can be used to help time sensitive processes like how you might enforce Service Level Agreements (SLAs). This includes features around alerting as well as ensuring that a process will not wait indefinitely for a response from an external service.',
     diagram: enforcingSLA,
-    config: {
-      diagram: {
         tooltips: [
           {
             id: 'Event_1f7rc2t',
@@ -90,17 +81,13 @@ export default [{
             text: 'This event based gateway is connected to two or more events. In this case a Message event and a Timer event. Whichever event happens first will determine the path that will be followed. So in this case if we receive a message we’ll go on to the log reply task. But if the timer expires before we get a reply the process will go to an end event.'
           }
         ]
-      }
-    }
-  },
+      },
   {
     id: 'error-handling',
     name: 'Error Handling',
     description:
       'When implementing microservices, taking into account how to respond when a service is unable to successfully complete its task is an important step in ensuring robustness of your process but also important in making your process fully automated. This example shows how BPMN Error events can be used to catch and continue the process based on predefined criteria. It shows how those events propagate and how scope works within a process, sub process and event sub process. ',
     diagram: errorHandling,
-    config: {
-      diagram: {
         tooltips: [
           {
             id: 'Event_05j9v3i',
@@ -124,6 +111,4 @@ export default [{
           }
         ]
       }
-    }
-  }
 ];
